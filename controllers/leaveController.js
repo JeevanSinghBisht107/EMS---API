@@ -1,4 +1,4 @@
-import Employee from "../models/employee.js";
+import Employee from "../models/Employee.js";
 import Leave from "../models/Leave.js";
 
 const addLeave = async(req,res) => {

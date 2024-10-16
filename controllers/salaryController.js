@@ -1,5 +1,5 @@
 import Salary from "../models/Salary.js";
-import Employee from "../models/employee.js"
+import Employee from "../models/Employee.js"
 
 const addSalary = async (req, res) => {
   try {
