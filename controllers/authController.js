@@ -84,17 +84,23 @@ const signup = async (req, res,next) => {
 
     // Upload profile image to Firebase Storage if it exists
     if (req.file) {
-      const storageRef = ref(
-        storage,
-        `profileImages/${Date.now()}_${req.file.originalname}`
-      );
-      const snapshot = await uploadBytes(storageRef, req.file.buffer);
-      const downloadURL = await getDownloadURL(snapshot.ref);
+      try {
+        const storageRef = ref(
+          storage,
+          `profileImages/${Date.now()}_${req.file.originalname}`
+        );
+        const snapshot = await uploadBytes(storageRef, req.file.buffer);
+        const downloadURL = await getDownloadURL(snapshot.ref);
 
-      // Update user's profileImage with the Firebase image URL
-      savedUser.profileImage = downloadURL;
-      await savedUser.save();
+        // Update user's profileImage with the Firebase image URL
+        savedUser.profileImage = downloadURL;
+        await savedUser.save();
+      } catch (uploadError) {
+        console.error("Error uploading image to Firebase:", uploadError);
+        return res.status(500).json({ success: false, error: "Error uploading image" });
+      }
     }
+
 
     const newEmployee = new Employee({
       userId: savedUser._id,
