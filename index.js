@@ -17,6 +17,7 @@ const app = express();
 
 app.use(cors({
     origin:"https://ems-frontend-psi.vercel.app",
+    methods:['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders:['content-Type','Authorization'],
     credentials:true
 }));
