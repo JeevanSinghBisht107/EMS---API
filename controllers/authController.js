@@ -115,7 +115,7 @@ const signup = async (req, res,next) => {
     await newEmployee.save();
     return res.status(200).json({ success: true, message: "User Signed up" });
   } catch (error) {
-    console.log(error);
+    console.log("signup error",error);
     
     next(error);
     return res
