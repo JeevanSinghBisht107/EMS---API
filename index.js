@@ -19,7 +19,9 @@ app.use(cors({
     origin:"https://ems-frontend-psi.vercel.app",
     credentials:true
 }));
-app.use(express.json());
+app.use(express.json({ limit:'10mb' }));
+app.use(express.urlencoded({ limit:'10mb', extended:true })); // fro form data
+
 app.use(express.static('public/uploads'))
 app.use('/api/auth',authRouter);
 app.use('/api/department',departmentRouter)
