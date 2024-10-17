@@ -51,7 +51,7 @@ const login = async (req, res, next) => {
   }
 };
 
-const signup = async (req, res) => {
+const signup = async (req, res,next) => {
   try {
     const {
       name,
@@ -109,8 +109,7 @@ const signup = async (req, res) => {
     await newEmployee.save();
     return res.status(200).json({ success: true, message: "User Signed up" });
   } catch (error) {
-    console.log(error);
-
+    next(error);
     return res
       .status(500)
       .json({ success: false, error: "server error in signing up " });
