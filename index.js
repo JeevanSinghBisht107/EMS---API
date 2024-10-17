@@ -17,6 +17,7 @@ const app = express();
 
 app.use(cors({
     origin:"https://ems-frontend-psi.vercel.app",
+    allowedHeaders:['content-Type','Authorization'],
     credentials:true
 }));
 app.use(express.json({ limit:'10mb' }));
